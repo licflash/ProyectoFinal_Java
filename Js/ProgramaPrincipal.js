@@ -12,7 +12,7 @@ monedas.push(new moneda(1, "Peso", 1))
 monedas.push(new moneda(2, "Dolar", 273.62))
 monedas.push(new moneda(3, "Euro", 301.65))
 monedas.push(new moneda(4, "Libra", 352.04))
-monedas.push(new moneda(5, "Yen", 38.27)) 
+monedas.push(new moneda(5, "Yen", 38.27))
 //Agrego las monedas al array
 
 
@@ -33,11 +33,13 @@ juegos.push(new juego(2, "God of War", "Libra", 20))
 juegos.push(new juego(3, "OnlyUp", "Yen", 2))
 juegos.push(new juego(4, "League of Legends", "Dolar", 100))
 
+
 impuestopais = 0 //Variable impuesto
 
 //Funciones del programa 
 
 //Listado de juegos
+
 function mostrarJuegos(juegos) {
     let mensaje = "Este es el listado de juegos con su identificador:\n";
 
@@ -140,8 +142,8 @@ function convertir(divisa, monto) {
     return pesos;
 }
 
-function impuesto(divisa,a){
-    if (divisa !== "Peso"){
+function impuesto(divisa, a) {
+    if (divisa !== "Peso") {
         imp = (impuestopais * juegos[a].precio_juego) / 100;
     }
     else {
@@ -149,7 +151,7 @@ function impuesto(divisa,a){
     }
 
     return imp
-    }
+}
 
 
 // PROGRAMA COMPLETO
@@ -164,6 +166,7 @@ impuestopais = parseInt(prompt("Ingrese el número de porcentaje de impuestos de
 
 //Calculo final
 
-costofinal = convertir(juegos[j].moneda_juego,juegos[j].precio_juego) + impuesto(juegos[j].moneda_juego,j)
+costofinal = convertir(juegos[j].moneda_juego, juegos[j].precio_juego) + impuesto(juegos[j].moneda_juego, j)
 
 alert("El costo total es de: \n" + "$" + costofinal)
+
