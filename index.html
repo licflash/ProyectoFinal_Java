@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Calculator</title>
+    <link rel="stylesheet" href="./Css/styles.css">
 </head>
-
-<body id="cuerpo">
-    <h1 class="titulo">Game Calculator</h1>
-    <section class="formulario">
-        <div class="section-title">
-            <h2>Calculadora</h2>
-            <p>¡Calcula el costo total de tu videojuego en pesos!</p>
-        </div>
-        <table id="tablaJuegos">
-            <thead>
-                <tr>
-                    <th>ID del Juego</th>
-                    <th>Nombre del Juego</th>
-                    <th>Moneda</th>
-                    <th>Precio</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Los datos se llenarán aquí usando JavaScript -->
-            </tbody>
-        </table>
+<body>
+    <div class="container">
+        <h1 class="titulo">Game Calculator</h1>
+        <section class="formulario">
+            <div class="section-title">
+                <h2>Calculadora</h2>
+                <p>¡Calcula el costo total de tu videojuego en pesos!</p>
+            </div>
+            <table id="tablaJuegos">
+                <thead>
+                    <tr>
+                        <th>ID del Juego</th>
+                        <th>Nombre del Juego</th>
+                        <th>Moneda</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos se llenarán aquí usando JavaScript -->
+                </tbody>
+            </table>
             <div class="row">
                 <div class="juego">
                     <label for="name">Juego</label>
@@ -43,12 +43,8 @@
             </div>
             <div class="text-center"><button id="calculo">Calcular porcentaje</button></div>
             <div class="text-center2"><button id="nuevojuego">Cargar nuevo juego</button></div>
-            </form>
-            </div>
-            </div>
-    </section><!-- End Contact Section -->
+        </section>
+    </div>
     <script src="./Js/estilo.js"></script>
-    <script src="./Js/ProgramaPrincipal.js"></script>
 </body>
-
 </html>

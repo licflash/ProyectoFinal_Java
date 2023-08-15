@@ -15,25 +15,6 @@ monedas.push(new moneda(4, "Libra", 352.04))
 monedas.push(new moneda(5, "Yen", 38.27))
 //Agrego las monedas al array
 
-
-class juego {
-    constructor(id_juego, nombre_juego, moneda_juego, precio_juego) {
-        this.id_juego = id_juego;
-        this.nombre_juego = nombre_juego;
-        this.moneda_juego = moneda_juego;
-        this.precio_juego = precio_juego;
-    }
-} //Clase juegos
-
-const juegos = [] //Array de juegos
-
-juegos.push(new juego(0, "Fifa 2023", "Dolar", 60.50))
-juegos.push(new juego(1, "Los sims", "Peso", 4500))
-juegos.push(new juego(2, "God of War", "Libra", 20))
-juegos.push(new juego(3, "OnlyUp", "Yen", 2))
-juegos.push(new juego(4, "League of Legends", "Dolar", 100))
-
-
 impuestopais = 0 //Variable impuesto
 
 //Funciones del programa 
