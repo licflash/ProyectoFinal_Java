@@ -7,31 +7,45 @@
     <title>Game Calculator</title>
 </head>
 
-<body>
-    <h1>Game Calculator</h1 class="titulo">
+<body id="cuerpo">
+    <h1 class="titulo">Game Calculator</h1>
     <section class="formulario">
         <div class="section-title">
             <h2>Calculadora</h2>
             <p>¡Calcula el costo total de tu videojuego en pesos!</p>
         </div>
-        <div class="row">
-            <div class="juego">
-                <label for="name">Juego</label>
-                <input type="text" name="name" class="inputjuego" id="name" required>
+        <table id="tablaJuegos">
+            <thead>
+                <tr>
+                    <th>ID del Juego</th>
+                    <th>Nombre del Juego</th>
+                    <th>Moneda</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos se llenarán aquí usando JavaScript -->
+            </tbody>
+        </table>
+            <div class="row">
+                <div class="juego">
+                    <label for="name">Juego</label>
+                    <input type="text" name="name" class="inputjuego" id="name" required>
+                </div>
+                <div class="moneda">
+                    <label for="name">Moneda del juego</label>
+                    <input type="moneda" class="inputmoneda" name="moneda" id="moneda" required>
+                </div>
             </div>
-            <div class="moneda">
-                <label for="name">Moneda del juego</label>
-                <input type="moneda" class="inputmoneda" name="moneda" id="moneda" required>
+            <div class="porcentajeimpuesto">
+                <label for="name">Porcentaje del impuesto</label>
+                <input type="text" class="inputporcentaje" name="porcentaje" id="porcentaje" required>
             </div>
-        </div>
-        <div class="porcentajeimpuesto">
-            <label for="name">Porcentaje del impuesto</label>
-            <input type="text" class="inputporcentaje" name="porcentaje" id="porcentaje" required>
-        </div>
-        <div class="text-center"><button type="calculo">Calcular porcentaje</button></div>
-        </form>
-        </div>
-        </div>
+            <div class="text-center"><button id="calculo">Calcular porcentaje</button></div>
+            <div class="text-center2"><button id="nuevojuego">Cargar nuevo juego</button></div>
+            </form>
+            </div>
+            </div>
     </section><!-- End Contact Section -->
     <script src="./Js/estilo.js"></script>
     <script src="./Js/ProgramaPrincipal.js"></script>
