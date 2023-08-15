@@ -65,9 +65,20 @@ juegos.push(new Juego(2, "God of War", "Libra", 20));
 juegos.push(new Juego(3, "OnlyUp", "Yen", 2));
 juegos.push(new Juego(4, "League of Legends", "Dolar", 100));
 
+const savedJuegos = sessionStorage.getItem('juegos');
+if (savedJuegos) {
+    juegos.push(...JSON.parse(savedJuegos));
+}
+
+
+
 //Mostrar los juegos
+
 function llenarTablaJuegos() {
     const tablaJuegos = document.getElementById('tablaJuegos').getElementsByTagName('tbody')[0];
+
+    // Limpiar la tabla antes de llenarla nuevamente
+    tablaJuegos.innerHTML = "";
 
     for (const juego of juegos) {
         const fila = tablaJuegos.insertRow();
@@ -82,9 +93,6 @@ function llenarTablaJuegos() {
         celdaPrecio.textContent = juego.precio_juego;
     }
 }
-
-llenarTablaJuegos();
-
 
 ///////////////////////////////////////
 
@@ -128,7 +136,6 @@ function seleccionjuego(videojuego) {
                         break;
                 }
             }
-
             nj = juegos.length
             const nuevojuego = {
                 id_juego: nj,
@@ -191,37 +198,43 @@ function impuesto(divisa, a) {
     return imp
 }
 
-// Asociar el clic del botón "Nuevo Juego" con la lógica de agregar juego
+// ... (evento click para agregar un nuevo juego)
 nuevoJuegoButton.addEventListener('click', function () {
-    const nombreNuevoJuego = prompt("Ingrese el nombre del juego");
-    const precioNuevoJuego = parseFloat(prompt("Ingrese el precio del nuevo juego"));
-    let monedaNuevaJuego = "";
-    while (!monedaNuevaJuego || monedaNuevaJuego.toLowerCase() !== "peso" && monedaNuevaJuego.toLowerCase() !== "dolar" && monedaNuevaJuego.toLowerCase() !== "euro" && monedaNuevaJuego.toLowerCase() !== "libra" && monedaNuevaJuego.toLowerCase() !== "yen") {
-        monedaNuevaJuego = prompt("Ingrese el nombre de la moneda del nuevo juego");
+    const confirmacion = confirm("¿Estás seguro que deseas agregar un nuevo juego?");
+
+    if (confirmacion) {
+        const nombreNuevoJuego = prompt("Ingrese el nombre del juego");
+        const precioNuevoJuego = parseFloat(prompt("Ingrese el precio del nuevo juego"));
+        let monedaNuevaJuego = "";
+        while (!monedaNuevaJuego || monedaNuevaJuego.toLowerCase() !== "peso" && monedaNuevaJuego.toLowerCase() !== "dolar" && monedaNuevaJuego.toLowerCase() !== "euro" && monedaNuevaJuego.toLowerCase() !== "libra" && monedaNuevaJuego.toLowerCase() !== "yen") {
+            monedaNuevaJuego = prompt("Ingrese el nombre de la moneda del nuevo juego");
+        }
+
+        const nuevojuego = new Juego(juegos.length, nombreNuevoJuego, monedaNuevaJuego, precioNuevoJuego);
+        juegos.push(nuevojuego);
+
+        // Guardar los juegos actualizados en LocalStorage
+        localStorage.setItem('juegos', JSON.stringify(juegos));
+        llenarTablaJuegos();
+    } else {
+        alert("No se agregó un nuevo juego.");
     }
-
-    const nuevojuego = new Juego(juegos.length, nombreNuevoJuego, monedaNuevaJuego, precioNuevoJuego);
-    juegos.push(nuevojuego);
-
-    // Limpiar los campos de entrada
-    inputJuego.value = "";
-    inputMoneda.value = "";
-    inputPorcentaje.value = "";
-    llenarTablaJuegos();
 });
 
 
 // Función para calcular el costo final
 function calcular() {
-    const selectedJuego = seleccionjuego(parseInt(videojuegoInput.value));
+    const selectedJuego = juegos[seleccionjuego(parseInt(inputJuego.value))];
     const impuestoPais = parseInt(inputPorcentaje.value);
 
     const costoFinal = convertir(selectedJuego.moneda_juego, selectedJuego.precio_juego) + impuesto(selectedJuego.moneda_juego, selectedJuego.id_juego, impuestoPais);
 
     alert("El costo total es de: \n" + "$" + costoFinal);
+    inputJuego.value = "";
+    inputPorcentaje.value = "";
 }
 
 // Asociar el clic del botón "Calcular" con la lógica de cálculo
 calculoButton.addEventListener('click', calcular);
 
-
+llenarTablaJuegos();
