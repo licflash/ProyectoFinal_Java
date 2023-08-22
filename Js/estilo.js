@@ -53,9 +53,9 @@ const monedas = []; //MonedasLista
 const juegos = []; //ConstanteLista
 
 monedas.push(new Moneda(1, "Peso", 1))
-monedas.push(new Moneda(2, "Dolar", 273.62))
-monedas.push(new Moneda(3, "Euro", 301.65))
-monedas.push(new Moneda(4, "Libra", 352.04))
+monedas.push(new Moneda(2, "Dolar", 367.46))
+monedas.push(new Moneda(3, "Euro", 376.67))
+monedas.push(new Moneda(4, "Libra", 445,63))
 monedas.push(new Moneda(5, "Yen", 38.27))
 
 //Carga de juegos iniciales
@@ -226,9 +226,7 @@ nuevoJuegoButton.addEventListener('click', function () {
 function calcular() {
     const selectedJuego = juegos[seleccionjuego(parseInt(inputJuego.value))];
     const impuestoPais = parseInt(inputPorcentaje.value);
-
     const costoFinal = convertir(selectedJuego.moneda_juego, selectedJuego.precio_juego) + impuesto(selectedJuego.moneda_juego, selectedJuego.id_juego, impuestoPais);
-
     alert("El costo total es de: \n" + "$" + costoFinal);
     inputJuego.value = "";
     inputPorcentaje.value = "";
