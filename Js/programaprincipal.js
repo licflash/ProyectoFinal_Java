@@ -199,39 +199,43 @@ function impuesto(divisa, a) {
 }
 
 // ... (evento click para agregar un nuevo juego)
-nuevoJuegoButton.addEventListener('click', function () {
+nuevoJuegoButton.addEventListener('click', async function () {
     const monedasOptions = {
         Peso: 'Peso',
         Dolar: 'Dolar',
         Euro: 'Euro',
+
+        
         Libra: 'Libra',
         Yen: 'Yen'
     };
 
-    Swal.fire({
-        title: 'Agregar un nuevo juego',
-        html: '<input id="nombreNuevoJuego" class="swal2-input" placeholder="Nombre del juego">' +
-            '<input id="precioNuevoJuego" class="swal2-input" placeholder="Precio del juego">' +
-            '<select id="monedaNuevaJuego" class="swal2-select">' +
+    try {
+        const swalResult = await Swal.fire({
+            title: 'Agregar un nuevo juego',
+            html: '<input id="nombreNuevoJuego" class="swal2-input" placeholder="Nombre del juego">' +
+                '<input id="precioNuevoJuego" class="swal2-input" placeholder="Precio del juego">' +
+                '<select id="monedaNuevaJuego" class="swal2-select">' +
                 Object.entries(monedasOptions).map(([key, value]) => `<option value="${key}">${value}</option>`).join('') +
-            '</select>',
-        showCancelButton: true,
-        confirmButtonText: 'Agregar',
-        cancelButtonText: 'Cancelar',
-        preConfirm: () => {
-            const nombreNuevoJuego = Swal.getPopup().querySelector('#nombreNuevoJuego').value;
-            const precioNuevoJuego = parseFloat(Swal.getPopup().querySelector('#precioNuevoJuego').value);
-            const monedaNuevaJuego = Swal.getPopup().querySelector('#monedaNuevaJuego').value.toLowerCase();
+                '</select>',
+            showCancelButton: true,
+            confirmButtonText: 'Agregar',
+            cancelButtonText: 'Cancelar',
+            preConfirm: () => {
+                const nombreNuevoJuego = Swal.getPopup().querySelector('#nombreNuevoJuego').value;
+                const precioNuevoJuego = parseFloat(Swal.getPopup().querySelector('#precioNuevoJuego').value);
+                const monedaNuevaJuego = Swal.getPopup().querySelector('#monedaNuevaJuego').value.toLowerCase();
 
-            if (!nombreNuevoJuego || isNaN(precioNuevoJuego)) {
-                Swal.showValidationMessage('Por favor, completa todos los campos correctamente.');
+                if (!nombreNuevoJuego || isNaN(precioNuevoJuego)) {
+                    Swal.showValidationMessage('Por favor, completa todos los campos correctamente.');
+                }
+
+                return { nombreNuevoJuego, precioNuevoJuego, monedaNuevaJuego };
             }
+        });
 
-            return { nombreNuevoJuego, precioNuevoJuego, monedaNuevaJuego };
-        }
-    }).then(result => {
-        if (result.isConfirmed) {
-            const nuevojuego = new Juego(juegos.length, result.value.nombreNuevoJuego, result.value.monedaNuevaJuego, result.value.precioNuevoJuego);
+        if (swalResult.isConfirmed) {
+            const nuevojuego = new Juego(juegos.length, swalResult.value.nombreNuevoJuego, swalResult.value.monedaNuevaJuego, swalResult.value.precioNuevoJuego);
             juegos.push(nuevojuego);
 
             // Guardar los juegos actualizados en LocalStorage
@@ -240,10 +244,10 @@ nuevoJuegoButton.addEventListener('click', function () {
 
             Swal.fire('¡Agregado!', 'El nuevo juego ha sido agregado correctamente.', 'success');
         }
-    });
+    } catch (error) {
+        console.error('Error al agregar el nuevo juego:', error);
+    }
 });
-
-
 
 // Función para calcular el costo final
 function calcular() {
